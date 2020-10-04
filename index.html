@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <input type="text" size="40" id ='key'>
+    <input type="text" size="40" id = 'city'>  
+    <button>Получить данные о погоде</button>
+    
+</body>
+<script>
+    window.onload = function() 
+    {
+        var acces_key = document.querySelector("#key");
+        var city = document.querySelector("#city");
+        var button = document.querySelector("button");
+        button.onclick = function(){
+
+            Get_data_about_the_weather(acces_key, city)
+
+        }
+
+        function Get_data_about_the_weather(key, city){
+            var current_city = city.value;
+            var current_key = key.value;
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET','http://api.weatherstack.com/current?access_key='+ current_key +"&query=" + current_city);
+
+            xhr.onload = () =>{
+                var data = JSON.parse(xhr.response);
+                console.log(data);
+
+            }
+            xhr.send();
+        }
+
+
+
+
+
+
+
+    }
+
+
+</script>
+</html>
